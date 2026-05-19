@@ -1,1 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>S.R.I Industrial Valves – Since 1994</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:   #0d2151;
+  --steel:  #2e6cb5;
+  --accent: #e8620a;
+  --silver: #5a6a7a;
+  --light:  #eef2f7;
+  --white:  #ffffff;
+  --dark:   #111820;
+  --mid:    #c8d4e0;
+  --mesh1:  #dde8f4;
+  --mesh2:  #f5f8fc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--mesh2);color:var(--dark);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--mesh2)}
+::-webkit-scrollbar-thumb{background:var(--steel);border-radius:3px}
 
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 60px;
+  background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(16px);
+  border-bottom:2px solid var(--mid);
+  box-shadow:0 2px 16px rgba(13,33,81,0.07);
+  transition:padding 0.3s;
+}
+nav.scrolled{padding:6px 60px}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo img{height:58px;object-fit:contain}
+.nav-brand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.08em;color:var(--navy);line-height:1.2}
+.nav-brand span{display:block;font-size:0.65rem;letter-spacing:0.22em;color:var(--accent);font-weight:400}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--navy);text-decoration:none;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;position:relative;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:width 0.3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{width:100%}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:var(--mesh2);
+}
+
+/* Light mesh background */
+.hero-mesh{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(46,108,181,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 20% 70%, rgba(232,98,10,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 10%, rgba(13,33,81,0.06) 0%, transparent 60%);
+}
+/* Mesh grid lines */
+.hero-mesh::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(13,33,81,0.06) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(13,33,81,0.06) 1px, transparent 1px);
+  background-size:50px 50px;
+  animation:meshDrift 30s linear infinite;
+}
+/* Diagonal mesh overlay */
+.hero-mesh::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(45deg,rgba(46,108,181,0.03) 1px,transparent 1px),
+    linear-gradient(-45deg,rgba(46,108,181,0.03) 1px,transparent 1px);
+  background-size:70px 70px;
+}
+@keyframes meshDrift{from{transform:translate(0,0)}to{transform:translate(50px,50px)}}
+
+/* Floating mesh circles */
+.mesh-circle{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(46,108,181,0.08) 0%,transparent 70%);
+  animation:floatCircle 8s ease-in-out infinite;
+}
+.mc1{width:500px;height:500px;top:-100px;right:-100px;animation-delay:0s}
+.mc2{width:300px;height:300px;bottom:50px;left:-80px;animation-delay:3s}
+.mc3{width:200px;height:200px;top:50%;right:35%;animation-delay:5s}
+@keyframes floatCircle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-20px) scale(1.05)}}
+
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;display:flex;align-items:center;
+  padding:130px 60px 80px;gap:0;
+}
+.hero-left{flex:1;display:flex;flex-direction:column}
+.hero-right{
+  flex-shrink:0;width:520px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+
+/* ── VALVE ANIMATION SCENE ── */
+.valve-scene{
+  position:relative;width:480px;height:480px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Outer rotating ring */
+.valve-ring{
+  position:absolute;inset:0;
+  border:1px dashed rgba(46,108,181,0.2);
+  border-radius:50%;
+  animation:ringRotate 20s linear infinite;
+}
+.valve-ring::before{
+  content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);
+  width:8px;height:8px;border-radius:50%;background:var(--accent);
+}
+@keyframes ringRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Inner ring */
+.valve-ring2{
+  position:absolute;inset:30px;
+  border:1px solid rgba(46,108,181,0.1);
+  border-radius:50%;
+  animation:ringRotate 15s linear infinite reverse;
+}
+
+/* Pipe left */
+.pipe-left{
+  position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:140px;height:36px;display:flex;align-items:center;
+}
+.pipe-left-body{
+  width:100%;height:20px;
+  background:linear-gradient(180deg,#d0dce8 0%,#a8bccf 30%,#8aaabb 50%,#a8bccf 70%,#d0dce8 100%);
+  border-radius:2px 0 0 2px;
+  position:relative;overflow:hidden;
+}
+
+/* Pipe right */
+.pipe-right{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:140px;height:36px;display:flex;align-items:center;
+}
+.pipe-right-body{
+  width:100%;height:20px;
+  background:linear-gradient(180deg,#d0dce8 0%,#a8bccf 30%,#8aaabb 50%,#a8bccf 70%,#d0dce8 100%);
+  border-radius:0 2px 2px 0;
+  position:relative;overflow:hidden;
+}
+
+/* Water flow particles in pipes */
+.water-flow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  display:flex;gap:18px;
+  animation:flowRight 1.4s linear infinite;
+}
+.flow-left .water-flow{animation:flowRight 1.4s linear infinite}
+.flow-right .water-flow{animation:flowRight 1.4s linear infinite}
+.water-drop{
+  width:24px;height:6px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,rgba(74,159,212,0.7),transparent);
+}
+@keyframes flowRight{from{transform:translateY(-50%) translateX(-60px)}to{transform:translateY(-50%) translateX(60px)}}
+
+/* Flanges */
+.flange{
+  position:absolute;top:50%;
+  width:12px;height:34px;
+  background:linear-gradient(90deg,#b0c4d4,#8aaabb,#b0c4d4);
+  transform:translateY(-50%);
+  box-shadow:0 1px 4px rgba(0,0,0,0.15);
+}
+.pipe-left .flange{right:0}
+.pipe-right .flange{left:0}
+
+/* Valve body SVG wrapper */
+.valve-body-wrap{
+  position:relative;z-index:5;
+  animation:valveFloat 5s ease-in-out infinite;
+}
+@keyframes valveFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.valve-body-wrap img{
+  width:260px;height:auto;
+  filter:drop-shadow(0 20px 50px rgba(13,33,81,0.18)) drop-shadow(0 8px 20px rgba(46,108,181,0.15));
+}
+
+/* Valve open glow effect */
+.valve-glow{
+  position:absolute;
+  width:80px;height:80px;
+  background:radial-gradient(circle,rgba(74,159,212,0.5) 0%,rgba(74,159,212,0) 70%);
+  border-radius:50%;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:glowPulse 2s ease-in-out infinite;
+}
+@keyframes glowPulse{0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.4)}}
+
+/* Water spray coming OUT of valve center */
+.spray-container{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:200px;height:200px;z-index:4;pointer-events:none;
+}
+
+/* Left spray */
+.spray-left,.spray-right{
+  position:absolute;top:50%;width:80px;
+  display:flex;flex-direction:column;gap:5px;
+  transform:translateY(-50%);
+}
+.spray-left{right:calc(50% + 10px)}
+.spray-right{left:calc(50% + 10px)}
+
+.spray-drop{
+  height:4px;border-radius:2px;
+  background:linear-gradient(90deg,rgba(74,159,212,0.9),rgba(144,200,240,0.5),transparent);
+  animation:sprayOut 1.2s ease-out infinite;
+  transform-origin:right center;
+}
+.spray-left .spray-drop{
+  background:linear-gradient(90deg,transparent,rgba(144,200,240,0.5),rgba(74,159,212,0.9));
+  transform-origin:left center;
+  animation:sprayOutLeft 1.2s ease-out infinite;
+}
+
+.spray-drop:nth-child(1){width:70px;animation-delay:0s}
+.spray-drop:nth-child(2){width:55px;animation-delay:0.15s}
+.spray-drop:nth-child(3){width:40px;animation-delay:0.3s}
+.spray-drop:nth-child(4){width:60px;animation-delay:0.08s}
+.spray-drop:nth-child(5){width:45px;animation-delay:0.22s}
+
+@keyframes sprayOut{
+  0%{opacity:0;transform:translateX(0) scaleX(0)}
+  30%{opacity:1;transform:translateX(5px) scaleX(0.6)}
+  70%{opacity:0.7;transform:translateX(18px) scaleX(1)}
+  100%{opacity:0;transform:translateX(30px) scaleX(1.1)}
+}
+@keyframes sprayOutLeft{
+  0%{opacity:0;transform:translateX(0) scaleX(0)}
+  30%{opacity:1;transform:translateX(-5px) scaleX(0.6)}
+  70%{opacity:0.7;transform:translateX(-18px) scaleX(1)}
+  100%{opacity:0;transform:translateX(-30px) scaleX(1.1)}
+}
+
+/* Mist drops */
+.mist{
+  position:absolute;border-radius:50%;
+  background:rgba(74,159,212,0.4);
+  animation:mistFloat 2s ease-out infinite;
+}
+@keyframes mistFloat{
+  0%{opacity:0.8;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:translate(var(--mx),var(--my)) scale(0.3)}
+}
+
+/* Pressure gauge decoration */
+.gauge{
+  position:absolute;top:20px;right:60px;
+  width:56px;height:56px;
+  background:var(--white);border:2px solid var(--mid);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(13,33,81,0.1);
+  z-index:6;
+}
+.gauge-inner{
+  width:36px;height:36px;border-radius:50%;
+  background:conic-gradient(var(--accent) 0deg, var(--accent) 200deg, var(--mid) 200deg);
+  display:flex;align-items:center;justify-content:center;
+}
+.gauge-center{width:14px;height:14px;border-radius:50%;background:var(--white)}
+.gauge-needle{
+  position:absolute;width:2px;height:14px;background:var(--navy);
+  top:50%;left:50%;transform-origin:bottom center;
+  transform:translate(-50%,-100%) rotate(-30deg);
+  border-radius:2px;animation:needleSpin 4s ease-in-out infinite;
+}
+@keyframes needleSpin{0%{transform:translate(-50%,-100%) rotate(-30deg)}50%{transform:translate(-50%,-100%) rotate(40deg)}100%{transform:translate(-50%,-100%) rotate(-30deg)}}
+
+/* Pressure label */
+.gauge-label{
+  position:absolute;top:80px;right:48px;z-index:6;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);
+}
+
+/* Pipe label */
+.pipe-label{
+  position:absolute;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--accent);background:rgba(255,255,255,0.9);
+  padding:2px 8px;border:1px solid rgba(232,98,10,0.2);
+}
+.pipe-label-in{bottom:calc(50% + 22px);left:20px}
+.pipe-label-out{bottom:calc(50% + 22px);right:20px}
+
+/* Flow arrows */
+.flow-arrow{
+  position:absolute;top:50%;
+  font-size:1rem;color:rgba(46,108,181,0.3);
+  animation:arrowPulse 1.5s ease-in-out infinite;
+}
+.fa-left{left:20px;transform:translateY(-50%)}
+.fa-right{right:20px;transform:translateY(-50%)}
+@keyframes arrowPulse{0%,100%{opacity:0.2}50%{opacity:0.8}}
+
+/* ── HERO TEXT ── */
+.hero-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.76rem;
+  letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:12px;margin-bottom:22px;
+  animation:fadeUp 0.8s 0.2s ease both;
+}
+.hero-eyebrow::before{content:'';width:26px;height:2px;background:var(--accent)}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.8rem,7vw,7.5rem);
+  letter-spacing:0.03em;line-height:0.92;color:var(--navy);
+  animation:fadeUp 0.8s 0.4s ease both;
+}
+.hero-title .t-steel{color:#2e6cb5}
+.hero-title .t-orange{color:var(--accent)}
+.hero-sub{
+  margin-top:20px;font-size:0.88rem;letter-spacing:0.28em;
+  text-transform:uppercase;color:var(--silver);font-weight:300;
+  animation:fadeUp 0.8s 0.6s ease both;
+}
+.hero-rule{width:56px;height:3px;background:var(--accent);margin:26px 0;animation:expandW 0.8s 0.8s ease both}
+@keyframes expandW{from{width:0}to{width:56px}}
+.hero-desc{
+  max-width:460px;font-size:1rem;line-height:1.85;color:var(--silver);font-weight:300;
+  animation:fadeUp 0.8s 1s ease both;
+}
+.hero-cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;animation:fadeUp 0.8s 1.2s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+.btn-p{
+  padding:13px 36px;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.87rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;
+  color:var(--white);text-decoration:none;background:var(--accent);
+  border:2px solid var(--accent);transition:all 0.3s;
+  box-shadow:0 6px 24px rgba(232,98,10,0.3);
+}
+.btn-p:hover{background:#d4550a;transform:translateY(-3px);box-shadow:0 12px 36px rgba(232,98,10,0.4)}
+.btn-o{
+  padding:13px 36px;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.87rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;
+  color:var(--navy);text-decoration:none;background:transparent;
+  border:2px solid var(--navy);transition:all 0.3s;
+}
+.btn-o:hover{background:var(--navy);color:var(--white);transform:translateY(-3px)}
+
+/* ── MARQUEE ── */
+.marquee-bar{
+  background:var(--navy);padding:22px 0;overflow:hidden;position:relative;
+}
+.marquee-track{
+  display:flex;white-space:nowrap;
+  animation:marquee 22s linear infinite;
+}
+.marquee-item{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.88rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);padding:0 28px;
+}
+.marquee-dot{color:var(--accent);font-size:1rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;
+  letter-spacing:0.38em;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.section-label::before{content:'';width:22px;height:2px;background:var(--accent)}
+.sec-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,4.5vw,3.8rem);letter-spacing:0.03em;
+  color:var(--navy);line-height:1;
+}
+.sec-title .a{color:var(--accent)}
+.sec-title-w{color:var(--white)!important}
+
+/* ── ABOUT ── */
+.about{
+  padding:100px 60px;
+  background:var(--white);
+  position:relative;overflow:hidden;
+}
+/* subtle mesh on about too */
+.about::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(13,33,81,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(13,33,81,0.025) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.about-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+.about-text p{font-size:1rem;line-height:1.9;color:var(--silver);font-weight:300;margin-top:22px}
+.about-text p+p{margin-top:14px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stat-card{
+  background:var(--mesh2);border:1px solid var(--mid);
+  border-bottom:3px solid var(--navy);padding:30px 26px;transition:all 0.4s;
+}
+.stat-card:hover{background:var(--navy);border-bottom-color:var(--accent);transform:translateY(-5px);box-shadow:0 14px 40px rgba(13,33,81,0.16)}
+.stat-card:hover .sn{color:var(--accent)}
+.stat-card:hover .sl{color:rgba(255,255,255,0.55)}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--navy);line-height:1;transition:color 0.4s}
+.sl{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);margin-top:5px;transition:color 0.4s}
+
+/* ── VISION MISSION ── */
+.vm-sec{padding:100px 60px;background:var(--mesh2);position:relative;overflow:hidden}
+.vm-sec::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(13,33,81,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(13,33,81,0.03) 1px,transparent 1px),
+    linear-gradient(45deg,rgba(13,33,81,0.02) 1px,transparent 1px);
+  background-size:50px 50px,50px 50px,70px 70px;
+}
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1200px;margin:56px auto 0;position:relative}
+.vm-card{
+  background:var(--white);border:1px solid var(--mid);
+  padding:50px 42px;position:relative;overflow:hidden;transition:all 0.4s;
+}
+.vm-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--accent);transition:height 0.4s}
+.vm-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(13,33,81,0.1)}
+.vm-card:hover::before{height:100%}
+.vm-icon-b{width:58px;height:58px;margin-bottom:26px;display:flex;align-items:center;justify-content:center;background:var(--navy)}
+.vm-icon-b svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.vm-t{font-family:'Barlow Condensed',sans-serif;font-size:1.7rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:18px}
+.vm-card p{font-size:0.94rem;line-height:1.85;color:var(--silver);font-weight:300}
+.vm-card p+p{margin-top:14px}
+.vm-wm{position:absolute;bottom:-12px;right:-6px;font-family:'Bebas Neue',sans-serif;font-size:5.5rem;color:rgba(13,33,81,0.04);line-height:1;pointer-events:none;user-select:none}
+
+/* ── PRODUCTS ── */
+.products{background:var(--navy);padding:100px 60px;position:relative;overflow:hidden}
+.products::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+.prod-hd{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative}
+.prod-hd p{max-width:360px;color:rgba(255,255,255,0.45);font-size:0.94rem;line-height:1.7;font-weight:300}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1200px;margin:52px auto 0;position:relative}
+.prod-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  padding:38px 30px;position:relative;overflow:hidden;transition:all 0.4s;
+}
+.prod-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.prod-card:hover{background:rgba(255,255,255,0.07);transform:translateY(-6px);border-color:rgba(232,98,10,0.25)}
+.prod-card:hover::after{transform:scaleX(1)}
+.pn-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(255,255,255,0.05);line-height:1;margin-bottom:6px}
+.pn-name{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);margin-bottom:12px}
+.prod-card p{font-size:0.86rem;color:rgba(255,255,255,0.42);line-height:1.7;font-weight:300}
+
+/* ── WHY US ── */
+.why{background:var(--white);padding:100px 60px;position:relative;overflow:hidden}
+.why::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(13,33,81,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(13,33,81,0.025) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1200px;margin:56px auto 0;border:1px solid var(--mid);position:relative}
+.why-item{padding:44px 28px;border-right:1px solid var(--mid);transition:all 0.4s;position:relative}
+.why-item:last-child{border-right:none}
+.why-item::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transition:transform 0.4s}
+.why-item:hover::before{transform:scaleX(1)}
+.why-item:hover{background:var(--mesh2)}
+.why-big{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;color:var(--mid);line-height:1;margin-bottom:14px;transition:color 0.3s}
+.why-item:hover .why-big{color:var(--accent)}
+.why-t{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:10px}
+.why-item p{font-size:0.83rem;color:var(--silver);line-height:1.7;font-weight:300}
+
+/* ── CONTACT ── */
+.contact{padding:100px 60px;background:var(--mesh2);position:relative;overflow:hidden}
+.contact::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(13,33,81,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(13,33,81,0.03) 1px,transparent 1px),
+    linear-gradient(45deg,rgba(13,33,81,0.02) 1px,transparent 1px);
+  background-size:50px 50px,50px 50px,70px 70px;
+}
+.ct-wrap{max-width:1200px;margin:56px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;position:relative}
+.ct-cards{display:flex;flex-direction:column;gap:18px}
+.ct-card{
+  background:var(--white);border:1px solid var(--mid);border-left:4px solid var(--navy);
+  padding:22px 26px;display:flex;gap:18px;align-items:flex-start;transition:all 0.3s;
+}
+.ct-card:hover{border-left-color:var(--accent);transform:translateX(4px);box-shadow:0 8px 28px rgba(13,33,81,0.09)}
+.ct-ico{flex-shrink:0;width:42px;height:42px;background:var(--navy);display:flex;align-items:center;justify-content:center}
+.ct-ico svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.ct-lbl{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;font-weight:700}
+.ct-val p{font-size:0.9rem;color:var(--silver);line-height:1.6;font-weight:300}
+.ct-val a{color:var(--navy);text-decoration:none;font-weight:600;transition:color 0.3s}
+.ct-val a:hover{color:var(--accent)}
+.cta-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.bc{padding:12px 30px;font-family:'Barlow Condensed',sans-serif;font-size:0.83rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:var(--white);background:var(--accent);text-decoration:none;border:2px solid var(--accent);transition:all 0.3s}
+.bc:hover{background:#d4550a;transform:translateY(-2px)}
+.bm{padding:12px 30px;font-family:'Barlow Condensed',sans-serif;font-size:0.83rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:var(--navy);background:transparent;text-decoration:none;border:2px solid var(--navy);transition:all 0.3s}
+.bm:hover{background:var(--navy);color:var(--white);transform:translateY(-2px)}
+.map-blk{position:relative}
+.map-lbl{background:var(--navy);color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;padding:9px 18px;display:inline-block}
+.map-blk iframe{width:100%;height:350px;display:block;border:1px solid var(--mid)}
+.map-link{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--mid);border-top:none;padding:11px 18px;text-decoration:none;color:var(--navy);font-size:0.76rem;letter-spacing:0.12em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;font-weight:700;transition:all 0.3s}
+.map-link:hover{background:var(--navy);color:var(--accent)}
+.map-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:40px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px;border-top:3px solid var(--accent)}
+.ft-logo{display:flex;align-items:center;gap:14px}
+.ft-logo img{height:46px;object-fit:contain}
+.ft-brand{font-family:'Barlow Condensed',sans-serif;font-size:0.83rem;letter-spacing:0.1em;color:rgba(255,255,255,0.5)}
+.ft-brand strong{display:block;color:var(--white);font-size:0.96rem}
+.ft-links{display:flex;gap:22px}
+.ft-links a{font-size:0.76rem;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.3s}
+.ft-links a:hover{color:var(--accent)}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.22);letter-spacing:0.08em}
+
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rev.on{opacity:1;transform:translateY(0)}
+.revL{opacity:0;transform:translateX(-32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.revL.on{opacity:1;transform:translateX(0)}
+.revR{opacity:0;transform:translateX(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.revR.on{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:8px 18px}
+  .nav-links{display:none}
+  .hero-inner{flex-direction:column;padding:110px 20px 60px}
+  .hero-right{width:100%;order:-1}
+  .valve-scene{width:300px;height:300px}
+  .valve-body-wrap img{width:170px}
+  .pipe-left,.pipe-right{width:80px}
+  .gauge{top:10px;right:20px}
+  .hero-left{padding:0}
+  .about,.vm-sec,.products,.why,.contact{padding:70px 20px}
+  .about-grid,.vm-grid,.ct-wrap{grid-template-columns:1fr;gap:36px}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .why-item{border-right:none;border-bottom:1px solid var(--mid)}
+  footer{flex-direction:column;padding:32px 18px;text-align:center;align-items:center}
+}
+@media(max-width:560px){
+  .prod-grid,.stats-grid,.why-grid{grid-template-columns:1fr}
+  .valve-scene{width:260px;height:260px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="logo.png" alt="SRI Logo"/>
+    <div class="nav-brand">S.R.I Industrial Valves<span>Established 1994</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#vision">Vision & Mission</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why-us">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-mesh"></div>
+  <div class="mesh-circle mc1"></div>
+  <div class="mesh-circle mc2"></div>
+  <div class="mesh-circle mc3"></div>
+
+  <div class="hero-inner">
+    <!-- TEXT -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">Industrial Valve Specialists</div>
+      <h1 class="hero-title">
+        S.R.I<br/>
+        <span class="t-steel">Industrial</span><br/>
+        <span class="t-orange">Valves</span>
+      </h1>
+      <p class="hero-sub">Precision · Reliability · Excellence</p>
+      <div class="hero-rule"></div>
+      <p class="hero-desc">Three decades of engineering excellence in industrial valve supply. Serving Tamil Nadu's industries with premium-grade valve solutions — built to last, designed to perform.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn-p">View Products</a>
+        <a href="#contact" class="btn-o">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- VALVE ANIMATION -->
+    <div class="hero-right">
+      <div class="valve-scene">
+        <!-- Rings -->
+        <div class="valve-ring"></div>
+        <div class="valve-ring2"></div>
+
+        <!-- Left pipe -->
+        <div class="pipe-left">
+          <div class="pipe-left-body flow-left">
+            <div class="water-flow">
+              <div class="water-drop"></div><div class="water-drop"></div><div class="water-drop"></div><div class="water-drop"></div>
+            </div>
+          </div>
+          <div class="flange"></div>
+          <div class="pipe-label pipe-label-in">IN</div>
+          <div class="flow-arrow fa-left">→</div>
+        </div>
+
+        <!-- Right pipe -->
+        <div class="pipe-right">
+          <div class="pipe-right-body flow-right">
+            <div class="water-flow">
+              <div class="water-drop"></div><div class="water-drop"></div><div class="water-drop"></div><div class="water-drop"></div>
+            </div>
+          </div>
+          <div class="flange"></div>
+          <div class="pipe-label pipe-label-out">OUT</div>
+          <div class="flow-arrow fa-right">→</div>
+        </div>
+
+        <!-- Valve body -->
+        <div class="valve-body-wrap">
+          <img src="logo.png" alt="SRI Valve"/>
+          <div class="valve-glow"></div>
+        </div>
+
+        <!-- Water spray from valve center -->
+        <div class="spray-container">
+          <!-- Left spray -->
+          <div class="spray-left">
+            <div class="spray-drop"></div>
+            <div class="spray-drop"></div>
+            <div class="spray-drop"></div>
+          </div>
+          <!-- Right spray -->
+          <div class="spray-right">
+            <div class="spray-drop"></div>
+            <div class="spray-drop"></div>
+            <div class="spray-drop"></div>
+          </div>
+        </div>
+
+        <!-- Mist particles (JS-generated) -->
+        <div id="mist-container" style="position:absolute;inset:0;pointer-events:none;z-index:4"></div>
+
+        <!-- Pressure gauge -->
+        <div class="gauge">
+          <div class="gauge-inner"><div class="gauge-center"></div></div>
+          <div class="gauge-needle"></div>
+        </div>
+        <div class="gauge-label">PSI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span class="marquee-item">Ball Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Gate Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Globe Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Butterfly Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Check Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Needle Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Quality Assured</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Since 1994</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Ranipet, Tamil Nadu</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Ball Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Gate Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Globe Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Butterfly Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Check Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Needle Valves</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Quality Assured</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Since 1994</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Ranipet, Tamil Nadu</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-text revL">
+      <div class="section-label">About Us</div>
+      <h2 class="sec-title">30 Years of<br/><span class="a">Engineering</span><br/>Excellence</h2>
+      <p>Founded in 1994, S.R.I Industrial Valves has grown from a regional supplier to one of Tamil Nadu's most trusted names in industrial valve solutions. Our products are engineered for precision, built to withstand demanding industrial environments.</p>
+      <p>Headquartered in Ranipet — the heart of Tamil Nadu's industrial corridor — we serve clients across chemical processing, water treatment, oil & gas, and manufacturing sectors with integrity that only 30 years of experience can provide.</p>
+    </div>
+    <div class="stats-grid revR">
+      <div class="stat-card d1"><div class="sn">30+</div><div class="sl">Years in Business</div></div>
+      <div class="stat-card d2"><div class="sn">500+</div><div class="sl">Clients Served</div></div>
+      <div class="stat-card d3"><div class="sn">1000+</div><div class="sl">Products Delivered</div></div>
+      <div class="stat-card d4"><div class="sn">100%</div><div class="sl">Quality Assured</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION MISSION -->
+<section class="vm-sec" id="vision">
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div class="section-label rev">Our Purpose</div>
+    <h2 class="sec-title rev">Vision &amp; <span class="a">Mission</span></h2>
+  </div>
+  <div class="vm-grid">
+    <div class="vm-card rev d2">
+      <div class="vm-icon-b"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="vm-t">Our Vision</div>
+      <p>To be the most trusted and preferred industrial valve supplier across South India — recognized for uncompromising quality, technical innovation, and enduring client relationships that span generations.</p>
+      <p>We envision a future where every industrial installation in our region operates at peak efficiency, powered by valve solutions from S.R.I Industrial Valves.</p>
+      <div class="vm-wm">VISION</div>
+    </div>
+    <div class="vm-card rev d4">
+      <div class="vm-icon-b"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="vm-t">Our Mission</div>
+      <p>To deliver premium-grade industrial valves that meet the highest standards of quality and performance, while providing exceptional technical support and after-sales service to our clients.</p>
+      <p>We are committed to honest business practices, continuous product development, and building long-lasting partnerships with every client we serve — big or small.</p>
+      <div class="vm-wm">MISSION</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="prod-hd">
+    <div>
+      <div class="section-label rev"><span style="color:rgba(255,255,255,0.2)">—</span> What We Supply</div>
+      <h2 class="sec-title sec-title-w rev">Our <span class="a">Products</span></h2>
+    </div>
+    <p class="rev">A comprehensive range of industrial valves engineered for reliability across all critical process applications.</p>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card rev d1"><div class="pn-num">01</div><div class="pn-name">Ball Valves</div><p>Full bore and reduced bore ball valves in SS, CS, and brass for high-pressure and high-temperature industrial applications.</p></div>
+    <div class="prod-card rev d2"><div class="pn-num">02</div><div class="pn-name">Gate Valves</div><p>Heavy-duty gate valves for on/off pipeline control. Multiple sizes and pressure ratings for industrial and commercial use.</p></div>
+    <div class="prod-card rev d3"><div class="pn-num">03</div><div class="pn-name">Globe Valves</div><p>Precision globe valves for excellent flow regulation and throttling in steam, water, oil, and chemical services.</p></div>
+    <div class="prod-card rev d4"><div class="pn-num">04</div><div class="pn-name">Butterfly Valves</div><p>Lightweight, cost-effective butterfly valves for large-diameter pipelines with quick quarter-turn operation.</p></div>
+    <div class="prod-card rev d5"><div class="pn-num">05</div><div class="pn-name">Check Valves</div><p>Non-return check valves preventing backflow. Swing, lift, and dual plate configurations available.</p></div>
+    <div class="prod-card rev d6"><div class="pn-num">06</div><div class="pn-name">Needle & Plug Valves</div><p>Precision needle and plug valves for fine flow control in instrumentation, sampling, and process systems.</p></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why-us">
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div class="section-label rev">Our Strengths</div>
+    <h2 class="sec-title rev">Why Choose <span class="a">S.R.I</span></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item rev d1"><div class="why-big">01</div><div class="why-t">Legacy & Trust</div><p>Over 30 years built on honesty and reliability. A reputation that speaks for itself across Tamil Nadu's industrial community.</p></div>
+    <div class="why-item rev d2"><div class="why-big">02</div><div class="why-t">Quality First</div><p>Every valve undergoes rigorous quality checks. We source only from reputed manufacturers and stand behind every product.</p></div>
+    <div class="why-item rev d3"><div class="why-big">03</div><div class="why-t">Expert Guidance</div><p>Experienced professionals provide honest technical advice to help you select the right valve for your application and budget.</p></div>
+    <div class="why-item rev d4"><div class="why-big">04</div><div class="why-t">Prompt Delivery</div><p>Robust inventory and efficient logistics ensure timely delivery and minimal downtime for your operations.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div class="section-label rev">Reach Us</div>
+    <h2 class="sec-title rev">Contact <span class="a">Us</span></h2>
+  </div>
+  <div class="ct-wrap">
+    <div class="ct-cards">
+      <div class="ct-card rev d1">
+        <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>
+        <div class="ct-val"><div class="ct-lbl">Phone Numbers</div><p><a href="tel:+918903479387">+91 89034 79387</a></p><p><a href="tel:+918754110059">+91 87541 10059</a></p></div>
+      </div>
+      <div class="ct-card rev d2">
+        <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="ct-val"><div class="ct-lbl">Email Address</div><p><a href="mailto:sriindustrialvalves@gmail.com">sriindustrialvalves@gmail.com</a></p></div>
+      </div>
+      <div class="ct-card rev d3">
+        <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="ct-val"><div class="ct-lbl">Address</div><p>65/10, L.F Road, Karai<br/>Ranipet District, Tamil Nadu – 632 404</p></div>
+      </div>
+      <div class="ct-card rev d4">
+        <div class="ct-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="ct-val"><div class="ct-lbl">Business Hours</div><p>Monday – Saturday &nbsp;|&nbsp; 9:00 AM – 6:00 PM IST</p></div>
+      </div>
+      <div class="cta-btns rev d5">
+        <a href="tel:+918903479387" class="bc">📞 Call Now</a>
+        <a href="mailto:sriindustrialvalves@gmail.com" class="bm">✉ Email Us</a>
+      </div>
+    </div>
+    <div class="map-blk revR">
+      <div class="map-lbl">📍 Our Location</div>
+      <iframe src="https://maps.google.com/maps?q=12.9279,79.3277&z=15&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="SRI Industrial Valves Location"></iframe>
+      <a href="https://maps.app.goo.gl/Rmp8ANLdgHHJiDia9" target="_blank" class="map-link">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open in Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">
+    <img src="logo.png" alt="SRI Logo"/>
+    <div class="ft-brand"><strong>S.R.I Industrial Valves</strong>Established 1994 · Ranipet, Tamil Nadu</div>
+  </div>
+  <div class="ft-links">
+    <a href="#about">About</a><a href="#vision">Vision</a>
+    <a href="#products">Products</a><a href="#why-us">Why Us</a><a href="#contact">Contact</a>
+  </div>
+  <div class="ft-copy">© 2024 S.R.I Industrial Valves. All Rights Reserved.</div>
+</footer>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+// Scroll reveal
+const io=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('on')),{threshold:0.1});
+document.querySelectorAll('.rev,.revL,.revR').forEach(el=>io.observe(el));
+
+// Counter animation
+const statEls=document.querySelectorAll('.sn');
+const vals=[{v:30,s:'+'},{v:500,s:'+'},{v:1000,s:'+'},{v:100,s:'%'}];
+function counter(el,target,suf){
+  const start=performance.now();
+  const tick=now=>{
+    const p=Math.min((now-start)/1800,1);
+    el.textContent=Math.floor(p*target)+suf;
+    p<1&&requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+if(statEls.length){
+  const cio=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){vals.forEach((d,i)=>counter(statEls[i],d.v,d.s));cio.disconnect()}
+  },{threshold:0.3});
+  cio.observe(statEls[0].closest('section'));
+}
+
+// Mist particles around valve
+const mist=document.getElementById('mist-container');
+function spawnMist(){
+  const d=document.createElement('div');
+  d.className='mist';
+  const size=Math.random()*6+3;
+  const angle=Math.random()*Math.PI*2;
+  const radius=60+Math.random()*40;
+  const cx=240,cy=240;
+  const sx=cx+Math.cos(angle)*50;
+  const sy=cy+Math.sin(angle)*20;
+  const mx=(Math.cos(angle)*radius)+'px';
+  const my=(Math.sin(angle)*radius)+'px';
+  d.style.cssText=`
+    width:${size}px;height:${size}px;
+    left:${sx}px;top:${sy}px;
+    --mx:${mx};--my:${my};
+    animation-duration:${1.5+Math.random()*1.5}s;
+    animation-delay:${Math.random()*1.5}s;
+    opacity:0;
+  `;
+  mist.appendChild(d);
+  setTimeout(()=>d.remove(),(3000+Math.random()*1500));
+}
+setInterval(spawnMist,180);
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+}));
+</script>
+</body>
+</html>
